@@ -1,5 +1,14 @@
 <script setup>
 	import {ref} from 'vue';
+	import { createClient } from '@supabase/supabase-js'
+
+	// Create a single supabase client for interacting with your database
+	const API_KEY = import.meta.env.VITE_SUPABASE_API_KEY;
+	const projectUrl = import.meta.env.VITE_SUPABASE_URL;
+	const tableName = 'db_suggestion_box';
+
+	const supabase = createClient(projectUrl, API_KEY);
+
 	useHead({
 		title: 'Kotak Saran',
 	});
@@ -17,8 +26,53 @@
 			};
 
 			console.log('Form submitted:', submittedData.value);
+			insertFeedback()
+				.then(() => {
+					alert('Feedback submitted successfully!');
+					selectedOption.value = '';
+					textareaContent.value = '';
+					submittedData.value = null;
+				});
 		};
 	};
+
+	const testConnection = async () => {
+		try {
+			const { data, error } = await supabase
+				.from(tableName)
+				.select()
+
+				if (error) {
+					console.error('Error Test Connection',error);
+				}
+
+		} catch (error) {
+			console.error('Error Test Connection',error);
+		}
+	}
+
+	const insertFeedback = async () => {
+		try {
+			const { data, error } = await supabase
+				.from(tableName)
+				.insert([
+					{
+						feeling: submittedData.value.selectedOption,
+						feedback: submittedData.value.textareaContent
+					}
+				])
+
+				if (error) {
+					throw new Error(error.message);
+				}
+
+				console.log('Feedback Inserted:', data);
+
+		} catch (error) {
+			console.error('Error Insert Feedback',error);
+		}
+	}
+
 </script>
 
 <template>
