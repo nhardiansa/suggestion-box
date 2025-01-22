@@ -3,6 +3,12 @@ module.exports = {
 	darkMode: 'class', // or 'media' or 'class'
 	theme: {
 		extend: {},
+		container: {
+			center: true,
+		},
+		fontFamily: {
+			sans: ['Inter', 'sans-serif'],
+		}
 	},
 	variants: {
 		extend: {},
