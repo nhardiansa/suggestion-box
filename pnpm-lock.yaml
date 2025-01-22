@@ -109,8 +109,8 @@ importers:
         specifier: ^0.20.2
         version: 0.20.2(@vueuse/head@0.7.13(vue@3.5.13(typescript@4.9.5)))(critters@0.0.16)(vite@3.2.11(@types/node@18.19.71)(terser@5.37.0))(vue-router@4.5.0(vue@3.5.13(typescript@4.9.5)))(vue@3.5.13(typescript@4.9.5))
       vite-ssg-sitemap:
-        specifier: ^0.3.2
-        version: 0.3.2
+        specifier: ^0.8.1
+        version: 0.8.1
       vitest:
         specifier: ^0.18.0
         version: 0.18.1(jsdom@20.0.3)(terser@5.37.0)
@@ -2961,8 +2961,8 @@ packages:
       vite: ^3.0.0 || ^4.0.0
       vue: ^2.7.0 || ^3.2.24
 
-  vite-ssg-sitemap@0.3.2:
-    resolution: {integrity: sha512-udsHc11VYQLSy/Zy6efKHnU/ABozGUz84Z9GqmrD8MaB2HCezqFVFAJukwZaxBzcEjy1jFXfNCIcT8J6LefpWw==}
+  vite-ssg-sitemap@0.8.1:
+    resolution: {integrity: sha512-4IjhsnsC+Kcc/3Z4zOie9KIU633oH0lODZHNIjz3vJvw8aZ2SUor2tvcK16VWpMkkmQkU1iAIY04WWm3DzjM1w==}
 
   vite-ssg@0.20.2:
     resolution: {integrity: sha512-XtBgJEDrN9cL6pgzXvThrTS7Pm5zwZZnBt50EmL/O+QbdhD/ZjCbcp4GmIrWFBWjVBFcgfwgPccmWv3DAF6s/w==}
@@ -6498,7 +6498,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vite-ssg-sitemap@0.3.2: {}
+  vite-ssg-sitemap@0.8.1: {}
 
   vite-ssg@0.20.2(@vueuse/head@0.7.13(vue@3.5.13(typescript@4.9.5)))(critters@0.0.16)(vite@3.2.11(@types/node@18.19.71)(terser@5.37.0))(vue-router@4.5.0(vue@3.5.13(typescript@4.9.5)))(vue@3.5.13(typescript@4.9.5)):
     dependencies:
