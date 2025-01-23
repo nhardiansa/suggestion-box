@@ -1,13 +1,8 @@
 <script setup>
 	import {ref} from 'vue';
-	import { createClient } from '@supabase/supabase-js'
+	import {supabase} from '../utils/supabase';
 
-	// Create a single supabase client for interacting with your database
-	const API_KEY = import.meta.env.VITE_SUPABASE_API_KEY;
-	const projectUrl = import.meta.env.VITE_SUPABASE_URL;
 	const tableName = 'db_suggestion_box';
-
-	const supabase = createClient(projectUrl, API_KEY);
 
 	useHead({
 		title: 'Kotak Saran',
@@ -16,8 +11,10 @@
 	const selectedOption = ref('');
 	const textareaContent = ref('');
 	const submittedData = ref(null);
+	const loading = ref(false);
 
 	const submitForm = () => {
+		loading.value = true;
 		if (selectedOption.value && textareaContent.value) {
 
 			submittedData.value = {
@@ -32,7 +29,13 @@
 					selectedOption.value = '';
 					textareaContent.value = '';
 					submittedData.value = null;
-				});
+				})
+				.catch((error) => {
+					console.error('Error submitting feedback:', error);
+				})
+				.finally(() => {
+					loading.value = false;
+				})
 		};
 	};
 
@@ -76,18 +79,18 @@
 </script>
 
 <template>
-	<div class="h-screen w-screen bg-[#8E8E93]">
+	<div class="h-screen w-screen bg-[#8E8E93] relative">
 		<div class="container flex justify-center items-center h-full">
-			<div class="box py-[50px] px-10 bg-white rounded-[11px] flex flex-col gap-y-11 min-w-[614px]">
+			<div class="box py-[50px] md:px-10 px-6 bg-white md:rounded-[11px] flex flex-col xl:gap-y-11 gap-y-5 xl:w-[614px] w-full md:w-max h-screen md:h-max">
 				<div class="heading">
-					<h1 class="text-[2rem] font-medium">
+					<h1 class="lg:text-[2rem] text-[27px] font-medium text-center md:text-start">
 						Feedback
 					</h1>
 				</div>
 				<form class="form flex flex-col gap-y-9" @submit.prevent="submitForm">
 					<div class="feeling-input flex flex-col gap-y-4">
-						<label for="feeling">Perasaanmu setelah ikut KEY by YukNgaji Makassar</label>
-						<div class="emoticon-radio-buttons flex gap-x-4">
+						<label for="feeling" class="lg:text-base md:text-base text-[15px] text-center md:text-start">Perasaanmu setelah ikut KEY by YukNgaji Makassar</label>
+						<div class="emoticon-radio-buttons flex gap-x-4 justify-center md:justify-start">
 							<div class="emot-radio-wrapper relative w-max">
 								<div class="emoticon px-[0.3rem] py-2 w-max rounded-full text-3xl" :class="selectedOption === 'happy' ? 'bg-[#8E8E93]' : 'bg-[#D9D9D9]' ">
 									😊
@@ -109,12 +112,12 @@
 						</div>
 					</div>
 					<div class="feedback-input flex flex-col gap-y-4">
-						<label for="feedback-area">
+						<label for="feedback-area" class="text-[15px] md:text-base text-center md:text-start">
 							Kalau kamu punya feedback feel free ya dikirim disini hehe
 						</label>
-						<textarea v-model="textareaContent" name="feedback" id="feedback-area" placeholder="Kalau menurutku.........." class="rounded-md border border-[#E4E4E7] min-h-[220px]"></textarea>
-						<button type="submit" class="text-sm text-white bg-[#18181B] hover:bg-[#27272A] py-2 rounded-md duration-200">
-							Kirim
+						<textarea v-model="textareaContent" name="feedback" id="feedback-area" placeholder="Kalau menurutku.........." class="rounded-md border border-[#E4E4E7] min-h-[220px] text-[15px] md:text-base"></textarea>
+						<button type="submit" class="text-sm text-white bg-[#18181B] hover:bg-[#27272A] py-2 rounded-md duration-200 disabled:bg-[#8E8E93]" :disabled="loading">
+							{{ loading ? 'Loading...' : 'Kirim' }}
 						</button>
 					</div>
 				</form>
