@@ -13,5 +13,6 @@ declare module '@vue/runtime-core' {
     'IconAkarIcons:githubFill': typeof import('~icons/akar-icons/github-fill')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Toast: typeof import('./src/components/Toast.vue')['default']
   }
 }
