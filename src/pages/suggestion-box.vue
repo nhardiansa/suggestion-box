@@ -2,7 +2,7 @@
 	import {ref} from 'vue';
 	import {supabase} from '../utils/supabase';
 
-	const tableName = 'db_suggestion_box';
+	const tableName = import.meta.env.VITE_SUGESTION_BOX_TABLE_NAME;
 
 	useHead({
 		title: 'Kotak Saran',
