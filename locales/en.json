@@ -5,7 +5,8 @@
 			"menu": "Other Page",
 			"desc": "An example of other pages"
 		},
-		"not-found": "Page not found"
+		"not-found": "Page not found",
+		"sugestion-box": "Suggestion Box"
 	},
 	"app": {
 		"offline": "App ready to work offline",

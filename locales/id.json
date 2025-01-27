@@ -5,7 +5,8 @@
 			"menu": "Halaman lain",
 			"desc": "Contoh untuk halaman lain"
 		},
-		"not-found": "Laman tidak ditemukan"
+		"not-found": "Laman tidak ditemukan",
+		"sugestion-box": "Kotak saran"
 	},
 	"app": {
 		"offline": "Aplikasi siap digunakan tanpa jaringan internet",
