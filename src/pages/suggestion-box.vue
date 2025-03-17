@@ -1,11 +1,10 @@
 <script setup>
 	import { ref } from 'vue';
-	import { app as firebaseApp } from '../utils/firebase';
+	import { app as firebaseApp, dbFirestore } from '../utils/firebase';
 	import { addDoc, collection, getFirestore } from "firebase/firestore";
 	import Swal from 'sweetalert2'
 
 	const tableName = import.meta.env.VITE_SUGESTION_BOX_TABLE_NAME;
-	const db = getFirestore(firebaseApp);
 
 	useHead({
 		title: 'Kotak Saran',
@@ -22,12 +21,12 @@
 			submittedData.value = {
 				feeling: feeling.value,
 				feedback: feedback.value,
+				createdAt: new Date().toISOString(),
 			};
 
 			console.log('Form submitted:', submittedData.value, tableName);
 			insertFeedback()
 				.then(() => {
-					// alert('Feedback submitted successfully!');
 					feeling.value = '';
 					feedback.value = '';
 					submittedData.value = null;
@@ -48,7 +47,7 @@
 
 	const insertFeedback = async () => {
 		try {
-			const data = await addDoc(collection(db, tableName), submittedData.value);
+			const data = await addDoc(collection(dbFirestore, tableName), submittedData.value);
 			console.log('Feedback Inserted:', data);
 		} catch (error) {
 			console.error('Error Insert Feedback', error);
